@@ -275,9 +275,7 @@ def pv_set(*args, **kwargs):
         return tag(readable = False, writeable = True,**kwargs)(expose_function(func))
     return inner
 
-## For pushing out data e.g. audio stream?
-def pv_update(*args, **kwargs):
-    pass
+
 
 # Maybe with argument, one should support mutltiple argument function
 # Every Server will have a busy pv

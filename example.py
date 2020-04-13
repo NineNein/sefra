@@ -74,7 +74,7 @@ class example_channel(sefra.epics.device):
         print("In CAlc getfreq pv: ", self.get_frequency.pv_name())
         ret = random.randint(1,40)
         print(ret)
-        self.get_frequency.set(ret)
+        self.get_frequency.set(ret) #Here to test callbacks
 
         #ret = 1#self.get_frequency()
         return "test" + str(value * 10) + str(ret)

@@ -3,7 +3,8 @@ Tool to build and call epics server
 
 
 Every function needs a instance before starting the server, otherwise the PV is not created. E.g.
-Do not create channels at runtime, do it in the __init__
+Do not create channels at arbitary time, do it in the __init__ before starting the server. 
+Otherwise the channels are not listed in the the server pv list. There is currently no feature that can update that list.
 
 
 ## Getting started
