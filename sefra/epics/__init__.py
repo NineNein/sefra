@@ -253,6 +253,9 @@ def pv_get(*args, **kwargs):
     #All this is for long get, thread = True, its implemented as pv_set with extra paprameter zero args
     if kwargs.get("thread", False):
         kwargs["return_type"] = kwargs["type"]
+        if "count" in kwargs:
+            kwargs["return_count"] = kwargs["count"]
+
         kwargs["zero_args"] = True
             
 
@@ -392,6 +395,9 @@ class device(metaclass=TaggableType):
                     'prec' : return_prec,
                     'type' : return_type
                 }
+
+                if "return_count" in pv["args"]:
+                    pvdb[pv["name"] + ".VAL"]["count"] = pv["args"]["return_count"]
 
         server = SimpleServer()
         server.createPV(prefix, pvdb)
