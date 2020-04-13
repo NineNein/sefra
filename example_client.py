@@ -33,47 +33,40 @@ if __name__ == "__main__":
     f = ed.channel(0).calc(cv)
 
 
-    # rr = random.randint(0,100)
+    rr = random.randint(0,100)
 
-    # print("radom ", rr )
+    print("radom ", rr )
 
-    # ed.channel(0).set_frequency(rr)
-    # f = ed.channel(0).get_frequency()
-    # print(f) 
-
-
-    
-
-    
+    ed.channel(0).set_frequency(rr)
+    f = ed.channel(0).get_frequency()
+    print(f) 
 
 
 
+    print(ed.channel(0).set_frequency.get())
 
-    # print(ed.channel(0).set_frequency.get())
+    print(ed.pv_names())
 
-    # print(ed.pv_names())
+    cv = random.randint(0,100)
+    f = ed.channel(0).calc(cv)
+    print(cv, f)
 
-    # cv = random.randint(0,100)
-    # f = ed.channel(0).calc(cv)
-    # print(cv, f)
-
-    # print(ed.channel(0).calc.pv_name())
-
-
-    # cv = random.randint(0,100)
-    # f = ed.channel(1).long_calc(cv)
-    # print("Long Run", cv, f)
+    print(ed.channel(0).calc.pv_name())
 
 
-    # #ed.channel(0).long_get.add_callback(onChanges)
-
-    # print("Long get " ,ed.channel(0).long_get())
-
-    #print(ed.idn())
-
-    # ed.channel(1).set_frequency(random.randint(0,100))
-    # ed.channel(0).set_frequency(random.randint(0,100))
+    cv = random.randint(0,100)
+    f = ed.channel(1).long_calc(cv)
+    print("Long Run", cv, f)
 
 
-    # while True:
-    #     time.sleep(1)
+    #ed.channel(0).long_get.add_callback(onChanges)
+
+    print("Long get " ,ed.channel(0).long_get())
+
+    print(ed.idn())
+
+    ed.channel(1).set_frequency(random.randint(0,100))
+    ed.channel(0).set_frequency(random.randint(0,100))
+
+
+    time.sleep(1)
