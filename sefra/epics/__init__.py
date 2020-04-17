@@ -373,7 +373,7 @@ class device(metaclass=TaggableType):
         pvdb = {
             self.name.upper() + ":BUSY" : {"type" : "int", "prec" : 1}
         }
-        infos = self.info()
+        infos = self._info()
         for pv in infos:
             prec = pv["args"].get("prec", 5)
             pvtype = pv["args"].get("type", "float")
@@ -426,12 +426,12 @@ class device(metaclass=TaggableType):
 
         return tags
 
-    def info(self):
+    def _info(self):
         tags = []
 
         for child in self.childs:
             data = []
-            for d in child.info():
+            for d in child._info():
                 d["name"] = self.name.upper() + ":" + d["name"].upper()
                 data.append(d)
             tags.extend(data)
