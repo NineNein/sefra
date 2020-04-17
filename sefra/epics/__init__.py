@@ -25,6 +25,7 @@ Errors Problems and Stuff:
 6. There are also some structural issues which can maybe make simpler, however there seems nothing which need the change of the interface
 7. Missing some underlines e.g. driver  to avoid overwriting from the user side by mistage
 8. There is a huge memory consumption when starting a EPCIS server ??? I do not why caused by EPICS_CA_MAX_ARRAY_BYTES
+9. long get has some issues if returning an array...
 """
 
 """
@@ -252,7 +253,9 @@ def pv_get(*args, **kwargs):
 
     #All this is for long get, thread = True, its implemented as pv_set with extra paprameter zero args
     if kwargs.get("thread", False):
-        kwargs["return_type"] = kwargs["type"]
+        if "type" in kwargs:
+            kwargs["return_type"] = kwargs["type"]
+
         if "count" in kwargs:
             kwargs["return_count"] = kwargs["count"]
 
@@ -365,7 +368,7 @@ class device(metaclass=TaggableType):
 
         self.driver = 0
 
-    def start(self):
+    def _start(self):
         if not self.server or self.parent is not None:
             return
 
@@ -376,11 +379,15 @@ class device(metaclass=TaggableType):
         infos = self._info()
         for pv in infos:
             prec = pv["args"].get("prec", 5)
-            pvtype = pv["args"].get("type", "float")
+            
+            
             pvdb[pv["name"]] = {
                 'prec' : prec,
-                'type' : pvtype
             }
+
+            pvtype = pv["args"].get("type", None)
+            if pvtype is not None:
+                pvdb[pv["name"]]["type"] = pvtype
 
             if "scan" in pv["args"]:
                 pvdb[pv["name"]]["scan"] = pv["args"]["scan"]
